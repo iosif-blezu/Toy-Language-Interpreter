@@ -1,0 +1,208 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	 (Boolean a;  (Int v;  (a = ValueExp{e = true};  ((IF(VarExp{id = 'a'}) THEN(v = ValueExp{e = 2})ELSE(v = ValueExp{e = 3})); print( VarExp{id = 'v'} )) ) ) ) 
+}
+-----SymbolTable-----
+MyDictionary{
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	 (Int v;  (a = ValueExp{e = true};  ((IF(VarExp{id = 'a'}) THEN(v = ValueExp{e = 2})ELSE(v = ValueExp{e = 3})); print( VarExp{id = 'v'} )) ) ) 
+	Boolean a
+}
+-----SymbolTable-----
+MyDictionary{
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	 (Int v;  (a = ValueExp{e = true};  ((IF(VarExp{id = 'a'}) THEN(v = ValueExp{e = 2})ELSE(v = ValueExp{e = 3})); print( VarExp{id = 'v'} )) ) ) 
+}
+-----SymbolTable-----
+MyDictionary{
+	a: false
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	 (a = ValueExp{e = true};  ((IF(VarExp{id = 'a'}) THEN(v = ValueExp{e = 2})ELSE(v = ValueExp{e = 3})); print( VarExp{id = 'v'} )) ) 
+	Int v
+}
+-----SymbolTable-----
+MyDictionary{
+	a: false
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	 (a = ValueExp{e = true};  ((IF(VarExp{id = 'a'}) THEN(v = ValueExp{e = 2})ELSE(v = ValueExp{e = 3})); print( VarExp{id = 'v'} )) ) 
+}
+-----SymbolTable-----
+MyDictionary{
+	a: false
+	v: 0
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	 ((IF(VarExp{id = 'a'}) THEN(v = ValueExp{e = 2})ELSE(v = ValueExp{e = 3})); print( VarExp{id = 'v'} )) 
+	a = ValueExp{e = true}
+}
+-----SymbolTable-----
+MyDictionary{
+	a: false
+	v: 0
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	 ((IF(VarExp{id = 'a'}) THEN(v = ValueExp{e = 2})ELSE(v = ValueExp{e = 3})); print( VarExp{id = 'v'} )) 
+}
+-----SymbolTable-----
+MyDictionary{
+	a: true
+	v: 0
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	print( VarExp{id = 'v'} )
+	(IF(VarExp{id = 'a'}) THEN(v = ValueExp{e = 2})ELSE(v = ValueExp{e = 3}))
+}
+-----SymbolTable-----
+MyDictionary{
+	a: true
+	v: 0
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	print( VarExp{id = 'v'} )
+	v = ValueExp{e = 2}
+}
+-----SymbolTable-----
+MyDictionary{
+	a: true
+	v: 0
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	print( VarExp{id = 'v'} )
+}
+-----SymbolTable-----
+MyDictionary{
+	a: true
+	v: 2
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+}
+-----SymbolTable-----
+MyDictionary{
+	a: true
+	v: 2
+}
+-----Output-----
+MyList{
+	2
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
