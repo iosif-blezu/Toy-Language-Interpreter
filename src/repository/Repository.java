@@ -49,6 +49,8 @@ public class Repository implements InterfaceRepository {
             logFile.println(program.getOutputList().toString());
             logFile.println("-----FileTable-----");
             logFile.println(program.getFileTable().toString());
+            logFile.println("-----HeapTable-----");
+            logFile.println(program.getHeapTable().toString());
             logFile.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             logFile.println("\n");
             logFile.close();

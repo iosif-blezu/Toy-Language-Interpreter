@@ -4,6 +4,7 @@ import model.ADT.*;
 import model.MyException;
 import model.ProgramState;
 import model.expression.Expression;
+import model.type.Type;
 import model.value.Value;
 
 public class PrintStatement implements InterfaceStatement
@@ -31,8 +32,15 @@ public class PrintStatement implements InterfaceStatement
         StackInterface<InterfaceStatement> exeStack = state.getExecutionStack();
         ListInterface<Value> out = state.getOutputList();
         DictionaryInterface<String, Value> symTable = state.getSymbolTable();
-        out.add(expression.eval(symTable));
+        HeapInterface heapTable = state.getHeapTable();
+        out.add(expression.eval(symTable, heapTable));
         return state;
+    }
+
+    @Override
+    public DictionaryInterface<String, Type> typeCheck(DictionaryInterface<String, Type> typeEnv) throws MyException {
+        expression.typeCheck(typeEnv);
+        return typeEnv;
     }
 
 

@@ -4,6 +4,7 @@ import model.MyException;
 
 import java.util.HashMap;
 import java.util.Collection;
+import java.util.Map;
 
 public class MyDictionary<T, V> implements DictionaryInterface<T,V> {
     private final HashMap<T, V> dictionary;
@@ -66,6 +67,20 @@ public class MyDictionary<T, V> implements DictionaryInterface<T,V> {
         synchronized (this) {
             return dictionary.values();
         }
+    }
+
+    @Override
+    public DictionaryInterface<T, V> deepCopy() {
+        DictionaryInterface<T, V> newDict = new MyDictionary<T, V>();
+        for (Map.Entry<T, V> entry : dictionary.entrySet()) {
+            newDict.add(entry.getKey(), entry.getValue());
+        }
+        return newDict;
+    }
+
+    @Override
+    public HashMap<T, V> getDict() {
+        return dictionary;
     }
 }
 

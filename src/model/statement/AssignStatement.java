@@ -40,8 +40,9 @@ public class AssignStatement implements InterfaceStatement
     public ProgramState execute(ProgramState state) throws MyException {
         StackInterface<InterfaceStatement> exeStack = state.getExecutionStack();
         DictionaryInterface<String, Value> symTable = state.getSymbolTable();
+        HeapInterface heapTable = state.getHeapTable();
         if(symTable.isDefined(id)){
-            Value val = expression.eval(symTable);
+            Value val = expression.eval(symTable, heapTable);
             Type typId = (symTable.lookup(id)).getType();
             if(val.getType().equals(typId))
                 symTable.update(id, val);
@@ -51,6 +52,18 @@ public class AssignStatement implements InterfaceStatement
         else
             throw new MyException("The used variable " + id + " was not declared before");
         return state;
+    }
+
+    @Override
+    public DictionaryInterface<String, Type> typeCheck(DictionaryInterface<String, Type> typeEnv) throws MyException {
+        Type typeVariable = typeEnv.lookup(id);
+        Type typeExpression = expression.typeCheck(typeEnv);
+        if (typeVariable.equals(typeExpression)) {
+            return typeEnv;
+        }
+        else {
+            throw new MyException("assignment statement: right hand side and left hand side have different types!");
+        }
     }
 
 }

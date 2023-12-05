@@ -1,5 +1,6 @@
 package controller;
 import model.ADT.ListInterface;
+import model.value.RefrenceValue;
 import model.value.Value;
 import repository.InterfaceRepository;
 import model.MyException;
@@ -7,7 +8,8 @@ import model.ProgramState;
 import model.ADT.StackInterface;
 import model.statement.InterfaceStatement;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Controller {
     private InterfaceRepository repository;
@@ -29,6 +31,25 @@ public class Controller {
     }
 
     //add a method that gets the output list not the exe stack
+
+    private List<Integer> getAddrFromSymTable(Collection<Value> symTableValues) {
+        return symTableValues.stream()
+                .filter(v -> v instanceof RefrenceValue)
+                .map(v -> {RefrenceValue v1 = (RefrenceValue) v; return v1.getAddress();})
+                .collect(Collectors.toList());
+    }
+
+    private Map<Integer, Value> unsafeGarbageCollector(List<Integer> symTableAddr, Map<Integer, Value> heap) {
+        return heap.entrySet().stream()
+                .filter(e -> symTableAddr.contains(e.getKey()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    Map<Integer,Value> safeGarbageCollector(List<Integer> symTableAddr, Map<Integer,Value> heapAddr){
+        return heapAddr.entrySet().stream()
+                .filter(elem-> symTableAddr.contains(elem.getKey()) || heapAddr.containsKey(elem.getKey()))
+                .collect(Collectors.toMap(HashMap.Entry::getKey, HashMap.Entry::getValue)); }
+
     public ListInterface<Value> getOut(ProgramState state)
     {
         return state.getOutputList();
@@ -50,6 +71,9 @@ public class Controller {
         {
             oneStep(prg);
             repository.logProgramStateExecution(prg);
+            prg.getHeapTable().setContent((HashMap<Integer, Value>) safeGarbageCollector(
+                    getAddrFromSymTable(prg.getSymbolTable().getDict().values()),
+                    prg.getHeapTable().getContent()));
         }
     }
     public void displayPrgState(ProgramState state)

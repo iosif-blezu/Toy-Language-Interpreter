@@ -1,0 +1,216 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	 (Ref(Int) v;  (new(v,ValueExp{e = 20});  (print( ReadHeapExp(exp=VarExp{id = 'v'}) );  (WriteHeap(v,ValueExp{e = 30}); print( ArithmeticExp{e1 = ReadHeapExp(exp=VarExp{id = 'v'}), e2 = ValueExp{e = 5}, op = 1} )) ) ) ) 
+}
+-----SymbolTable-----
+MyDictionary{
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----HeapTable-----
+{}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	 (new(v,ValueExp{e = 20});  (print( ReadHeapExp(exp=VarExp{id = 'v'}) );  (WriteHeap(v,ValueExp{e = 30}); print( ArithmeticExp{e1 = ReadHeapExp(exp=VarExp{id = 'v'}), e2 = ValueExp{e = 5}, op = 1} )) ) ) 
+	Ref(Int) v
+}
+-----SymbolTable-----
+MyDictionary{
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----HeapTable-----
+{}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	 (new(v,ValueExp{e = 20});  (print( ReadHeapExp(exp=VarExp{id = 'v'}) );  (WriteHeap(v,ValueExp{e = 30}); print( ArithmeticExp{e1 = ReadHeapExp(exp=VarExp{id = 'v'}), e2 = ValueExp{e = 5}, op = 1} )) ) ) 
+}
+-----SymbolTable-----
+MyDictionary{
+	v: RefValue{address=0, locationType=Int}
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----HeapTable-----
+{}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	 (print( ReadHeapExp(exp=VarExp{id = 'v'}) );  (WriteHeap(v,ValueExp{e = 30}); print( ArithmeticExp{e1 = ReadHeapExp(exp=VarExp{id = 'v'}), e2 = ValueExp{e = 5}, op = 1} )) ) 
+	new(v,ValueExp{e = 20})
+}
+-----SymbolTable-----
+MyDictionary{
+	v: RefValue{address=0, locationType=Int}
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----HeapTable-----
+{}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	 (print( ReadHeapExp(exp=VarExp{id = 'v'}) );  (WriteHeap(v,ValueExp{e = 30}); print( ArithmeticExp{e1 = ReadHeapExp(exp=VarExp{id = 'v'}), e2 = ValueExp{e = 5}, op = 1} )) ) 
+}
+-----SymbolTable-----
+MyDictionary{
+	v: RefValue{address=1, locationType=Int}
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----HeapTable-----
+{1=20}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	 (WriteHeap(v,ValueExp{e = 30}); print( ArithmeticExp{e1 = ReadHeapExp(exp=VarExp{id = 'v'}), e2 = ValueExp{e = 5}, op = 1} )) 
+	print( ReadHeapExp(exp=VarExp{id = 'v'}) )
+}
+-----SymbolTable-----
+MyDictionary{
+	v: RefValue{address=1, locationType=Int}
+}
+-----Output-----
+MyList{
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----HeapTable-----
+{1=20}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	 (WriteHeap(v,ValueExp{e = 30}); print( ArithmeticExp{e1 = ReadHeapExp(exp=VarExp{id = 'v'}), e2 = ValueExp{e = 5}, op = 1} )) 
+}
+-----SymbolTable-----
+MyDictionary{
+	v: RefValue{address=1, locationType=Int}
+}
+-----Output-----
+MyList{
+	20
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----HeapTable-----
+{1=20}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	print( ArithmeticExp{e1 = ReadHeapExp(exp=VarExp{id = 'v'}), e2 = ValueExp{e = 5}, op = 1} )
+	WriteHeap(v,ValueExp{e = 30})
+}
+-----SymbolTable-----
+MyDictionary{
+	v: RefValue{address=1, locationType=Int}
+}
+-----Output-----
+MyList{
+	20
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----HeapTable-----
+{1=20}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+	print( ArithmeticExp{e1 = ReadHeapExp(exp=VarExp{id = 'v'}), e2 = ValueExp{e = 5}, op = 1} )
+}
+-----SymbolTable-----
+MyDictionary{
+	v: RefValue{address=1, locationType=Int}
+}
+-----Output-----
+MyList{
+	20
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----HeapTable-----
+{1=30}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----ExeStack-----
+MyStack{
+}
+-----SymbolTable-----
+MyDictionary{
+	v: RefValue{address=1, locationType=Int}
+}
+-----Output-----
+MyList{
+	20
+	35
+}
+-----FileTable-----
+MyFileTable{
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----HeapTable-----
+{1=30}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+

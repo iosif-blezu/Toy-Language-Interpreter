@@ -1,10 +1,12 @@
 package model.statement;
 
+import model.ADT.HeapInterface;
 import model.ProgramState;
 import model.ADT.DictionaryInterface;
 import model.ADT.StackInterface;
 import model.ADT.FileTableInterface;
 import model.expression.Expression;
+import model.type.Type;
 import model.value.Value;
 import model.value.StringValue;
 import model.MyException;
@@ -39,9 +41,10 @@ public class CloseReadFileStatement implements InterfaceStatement {
         DictionaryInterface<String,Value> symbolTable = state.getSymbolTable();
         FileTableInterface<String, BufferedReader> fileTable = state.getFileTable();
         StackInterface<InterfaceStatement> stack = state.getExecutionStack();
+        HeapInterface heapTable = state.getHeapTable();
 
 
-        Value value = expression.eval(symbolTable);
+        Value value = expression.eval(symbolTable, heapTable);
         if(value.getType().equals(new StringType()))
         {
             StringValue stringValue = (StringValue)value;
@@ -63,5 +66,16 @@ public class CloseReadFileStatement implements InterfaceStatement {
             throw new MyException("Invalid type");
         }
         return null;
+    }
+
+    @Override
+    public DictionaryInterface<String, Type> typeCheck(DictionaryInterface<String, Type> typeEnv) throws MyException {
+        Type type = expression.typeCheck(typeEnv);
+        if (type.equals(new StringType())) {
+            return typeEnv;
+        }
+        else {
+            throw new MyException("Close file statement: the file name must have type string!");
+        }
     }
 }

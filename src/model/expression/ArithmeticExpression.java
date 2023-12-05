@@ -1,7 +1,9 @@
 package model.expression;
 import model.ADT.DictionaryInterface;
+import model.ADT.HeapInterface;
 import model.MyException;
 import model.type.IntType;
+import model.type.Type;
 import model.value.IntValue;
 import model.value.Value;
 
@@ -60,14 +62,14 @@ public class ArithmeticExpression implements Expression {
 
 
     @Override
-    public Value eval(DictionaryInterface<String, Value> symbolTable) throws MyException
+    public Value eval(DictionaryInterface<String, Value> symbolTable, HeapInterface heapTable) throws MyException
     {
         Value leftValue, rightValue;
-        leftValue = e1.eval(symbolTable);
+        leftValue = e1.eval(symbolTable, heapTable);
 
         if (leftValue.getType().equals(new IntType()))
         {
-            rightValue = e2.eval(symbolTable);
+            rightValue = e2.eval(symbolTable, heapTable);
 
             if (rightValue.getType().equals(new IntType()))
             {
@@ -115,6 +117,26 @@ public class ArithmeticExpression implements Expression {
     }
 
 
-
+    @Override
+    public Type typeCheck(DictionaryInterface<String, Type> typeEnv) throws MyException {
+        Type type1, type2;
+        type1 = e1.typeCheck(typeEnv);
+        type2 = e2.typeCheck(typeEnv);
+        if (type1.equals(new IntType()))
+        {
+            if (type2.equals(new IntType()))
+            {
+                return new IntType();
+            }
+            else
+            {
+                throw new MyException("second operand is not an integer");
+            }
+        }
+        else
+        {
+            throw new MyException("first operand is not an integer");
+        }
+    }
 }
 

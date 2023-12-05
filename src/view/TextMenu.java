@@ -5,7 +5,8 @@ import java.util.HashMap;
 
 public class TextMenu {
     private final Map<String,Command> commands;
-    public TextMenu() {
+    public TextMenu()
+    {
         commands = new HashMap<>();
     }
     public void addCommand(Command command)

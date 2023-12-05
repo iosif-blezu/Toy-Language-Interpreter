@@ -1,7 +1,9 @@
 package model.expression;
 
 import model.ADT.DictionaryInterface;
+import model.ADT.HeapInterface;
 import model.MyException;
+import model.type.Type;
 import model.value.Value;
 
 public class ValueExpression implements Expression {
@@ -27,9 +29,14 @@ public class ValueExpression implements Expression {
     }
 
     @Override
-    public Value eval(DictionaryInterface<String, Value> tbl) throws MyException
+    public Value eval(DictionaryInterface<String, Value> tbl, HeapInterface heapTable) throws MyException
     {
         return e;
+    }
+
+    @Override
+    public Type typeCheck(DictionaryInterface<String, Type> typeEnv) throws MyException {
+        return e.getType();
     }
 
 }

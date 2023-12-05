@@ -4,6 +4,7 @@ import model.MyException;
 import model.ProgramState;
 import model.expression.Expression;
 import model.type.BoolType;
+import model.type.Type;
 import model.value.Value;
 import model.value.BoolValue;
 public class IfStatement implements InterfaceStatement
@@ -55,7 +56,8 @@ public class IfStatement implements InterfaceStatement
     {
         StackInterface<InterfaceStatement> exeStack = state.getExecutionStack();
         DictionaryInterface<String, Value> symTable = state.getSymbolTable();
-        Value val = expression.eval(symTable);
+        HeapInterface heapTable = state.getHeapTable();
+        Value val = expression.eval(symTable, heapTable);
         if(!val.getType().equals(new BoolType()))
             throw new MyException("Conditional expression is not a boolean");
         else
@@ -67,6 +69,19 @@ public class IfStatement implements InterfaceStatement
                 exeStack.push(elseStatement);
         }
         return state;
+    }
+
+    @Override
+    public DictionaryInterface<String, Type> typeCheck(DictionaryInterface<String, Type> typeEnv) throws MyException {
+        Type typeExp = expression.typeCheck(typeEnv);
+        if (typeExp.equals(new BoolType())) {
+            thenStatement.typeCheck(typeEnv.deepCopy());
+            elseStatement.typeCheck(typeEnv.deepCopy());
+            return typeEnv;
+        }
+        else {
+            throw new MyException("The condition of if does not the type bool!");
+        }
     }
 
 

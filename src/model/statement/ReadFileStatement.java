@@ -49,6 +49,7 @@ public class ReadFileStatement implements InterfaceStatement
        DictionaryInterface<String, Value> symTable = state.getSymbolTable();
        FileTableInterface<String, BufferedReader> fileTable = state.getFileTable();
        StackInterface<InterfaceStatement> stack = state.getExecutionStack();
+       HeapInterface heapTable = state.getHeapTable();
 
        if(symTable.isDefined(variable_name))
        {
@@ -56,7 +57,7 @@ public class ReadFileStatement implements InterfaceStatement
            Type type = value.getType();
            if(type.equals(new IntType()))
            {
-               StringValue stringValue = (StringValue) expression.eval(symTable);
+               StringValue stringValue = (StringValue) expression.eval(symTable, heapTable);
                 String filename = stringValue.getValue();
                 BufferedReader bufferedReader = fileTable.lookup(filename);
                 try
@@ -85,6 +86,23 @@ public class ReadFileStatement implements InterfaceStatement
            }
        }
        return null;
+    }
+
+    @Override
+    public DictionaryInterface<String, Type> typeCheck(DictionaryInterface<String, Type> typeEnv) throws MyException {
+        Type typeExpression = expression.typeCheck(typeEnv);
+        Type typeVariable = typeEnv.lookup(variable_name);
+        if (typeExpression.equals(new StringType())) {
+            if (typeVariable.equals(new IntType())) {
+                return typeEnv;
+            }
+            else {
+                throw new MyException("ReadFileStatement: variable is not of type int!");
+            }
+        }
+        else {
+            throw new MyException("ReadFileStatement: expression is not a string!");
+        }
     }
 
 }

@@ -1,7 +1,10 @@
 package model.expression;
 
 import model.ADT.DictionaryInterface;
+import model.ADT.HeapInterface;
 import model.MyException;
+import model.type.BoolType;
+import model.type.Type;
 import model.value.Value;
 
 public class LogicExpression implements Expression
@@ -48,13 +51,13 @@ public class LogicExpression implements Expression
     }
 
     @Override
-    public Value eval(DictionaryInterface<String, Value> tbl) throws MyException {
+    public Value eval(DictionaryInterface<String, Value> tbl, HeapInterface heapTable) throws MyException {
         Value leftValue, rightValue;
-        leftValue = e1.eval(tbl);
+        leftValue = e1.eval(tbl, heapTable);
 
         if (leftValue.getType().equals(new model.type.BoolType()))
         {
-            rightValue = e2.eval(tbl);
+            rightValue = e2.eval(tbl, heapTable);
 
             if (rightValue.getType().equals(new model.type.BoolType()))
             {
@@ -78,6 +81,27 @@ public class LogicExpression implements Expression
         return null;
     }
 
+    @Override
+    public Type typeCheck(DictionaryInterface<String, Type> typeEnv) throws MyException {
+        Type typ1, typ2;
+        typ1 = e1.typeCheck(typeEnv);
+        typ2 = e2.typeCheck(typeEnv);
+        if (typ1.equals(new BoolType()))
+        {
+            if (typ2.equals(new BoolType()))
+            {
+                return new BoolType();
+            }
+            else
+            {
+                throw new MyException("Second operand is not a boolean");
+            }
+        }
+        else
+        {
+            throw new MyException("First operand is not a boolean");
+        }
+    }
 
 
 }

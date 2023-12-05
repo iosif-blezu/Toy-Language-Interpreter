@@ -1,8 +1,10 @@
 package model.statement;
 
+import model.ADT.DictionaryInterface;
 import model.MyException;
 import model.ProgramState;
 import model.ADT.StackInterface;
+import model.type.Type;
 
 public class ComparisonStatement implements InterfaceStatement
 {
@@ -41,6 +43,12 @@ public class ComparisonStatement implements InterfaceStatement
         exeStack.push(second);
         exeStack.push(first);
         return state;
+    }
+
+    @Override
+    public DictionaryInterface<String, Type> typeCheck(DictionaryInterface<String, Type> typeEnv) throws MyException {
+        return second.typeCheck(first.typeCheck(typeEnv));
+
     }
 
 }

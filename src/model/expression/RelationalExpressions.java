@@ -1,7 +1,10 @@
 package model.expression;
+import model.ADT.HeapInterface;
 import model.MyException;
 import model.ADT.DictionaryInterface;
+import model.type.BoolType;
 import model.type.IntType;
+import model.type.Type;
 import model.value.BoolValue;
 import model.value.IntValue;
 import model.value.Value;
@@ -65,13 +68,13 @@ public class RelationalExpressions implements Expression {
                 '}';
     }
     @Override
-    public Value eval(DictionaryInterface<String, Value> symbolTable) throws MyException
+    public Value eval(DictionaryInterface<String, Value> symbolTable, HeapInterface heapTable) throws MyException
     {
         Value firstValue, secondValue;
-        firstValue = firstExpression.eval(symbolTable);
+        firstValue = firstExpression.eval(symbolTable, heapTable);
         if(firstValue.getType().equals(new IntType()))
         {
-            secondValue = secondExpression.eval(symbolTable);
+            secondValue = secondExpression.eval(symbolTable, heapTable);
             if(secondValue.getType().equals(new IntType()))
             {
                 IntValue IntValue1 = (IntValue) firstValue;
@@ -131,5 +134,23 @@ public class RelationalExpressions implements Expression {
         }
         else throw new MyException("First operand is not an integer!");
 
+    }
+
+    @Override
+    public Type typeCheck(DictionaryInterface<String, Type> typeEnv) throws MyException {
+        Type type1, type2;
+        type1 = firstExpression.typeCheck(typeEnv);
+        type2 = secondExpression.typeCheck(typeEnv);
+        if (type1.equals(new IntType())) {
+            if (type2.equals(new IntType())) {
+                return new BoolType();
+            }
+            else {
+                throw new MyException("Second operand is not an integer");
+            }
+        }
+        else {
+            throw new MyException("First operand is not an integer");
+        }
     }
 }

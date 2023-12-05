@@ -2,10 +2,12 @@ package model.statement;
 
 import model.ADT.DictionaryInterface;
 import model.ADT.FileTableInterface;
+import model.ADT.HeapInterface;
 import model.ADT.StackInterface;
 
 import model.ProgramState;
 import model.type.StringType;
+import model.type.Type;
 import model.value.StringValue;
 import model.value.Value;
 import model.MyException;
@@ -41,7 +43,8 @@ public class OpenReadFileStatement implements InterfaceStatement {
         StackInterface<InterfaceStatement> stack = state.getExecutionStack();
         DictionaryInterface<String, Value> symbolTable = state.getSymbolTable();
         FileTableInterface<String, BufferedReader> fileTable = state.getFileTable();
-        Value value = this.expression.eval(symbolTable);
+        HeapInterface heapTable = state.getHeapTable();
+        Value value = this.expression.eval(symbolTable, heapTable);
         if(value.getType().equals(new StringType()))
         {
             StringValue stringValue = (StringValue)value;
@@ -64,5 +67,16 @@ public class OpenReadFileStatement implements InterfaceStatement {
             }
         }
         return null;
+    }
+
+    @Override
+    public DictionaryInterface<String, Type> typeCheck(DictionaryInterface<String, Type> typeEnv) throws MyException {
+        Type typeExpression = expression.typeCheck(typeEnv);
+        if (typeExpression.equals(new StringType())) {
+            return typeEnv;
+        }
+        else {
+            throw new MyException("OpenReadFileStatement: expression is not a string!");
+        }
     }
 }

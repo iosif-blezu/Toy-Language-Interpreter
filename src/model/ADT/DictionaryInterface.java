@@ -13,4 +13,10 @@ public interface DictionaryInterface<T, V> {
     HashMap<T, V> getContent();
 
     Collection<V> values();
+
+   DictionaryInterface<T, V> deepCopy();
+
+   HashMap<T,V> getDict();
+
+
 }

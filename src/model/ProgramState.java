@@ -11,13 +11,16 @@ public class ProgramState {
     DictionaryInterface<String, Value> symbolTable;
     ListInterface<Value> outputList;
     FileTableInterface<String, BufferedReader> fileTable;
+    HeapInterface heapTable;
     InterfaceStatement originalProgram; //optional field, but good to have
-    public ProgramState(StackInterface<InterfaceStatement> stack, DictionaryInterface<String, Value> symTable, ListInterface<Value> out, FileTableInterface<String,BufferedReader> fileTable , InterfaceStatement program){
+    public ProgramState(StackInterface<InterfaceStatement> stack, DictionaryInterface<String, Value> symTable, ListInterface<Value> out, FileTableInterface<String,BufferedReader> fileTable, HeapInterface heapTable , InterfaceStatement program){
         executionStack = stack;
         symbolTable = symTable;
         outputList = out;
         originalProgram = program;
         this.fileTable = fileTable;
+        this.heapTable = heapTable;
+
         stack.push(program);
     }
 
@@ -27,6 +30,7 @@ public class ProgramState {
                 "executionStack = " + executionStack +
                 ", symbolTable = " + symbolTable +
                 ", outputList = " + outputList +
+                ", heapTable = " + heapTable +
                 '}';
     }
 
@@ -45,6 +49,16 @@ public class ProgramState {
     public FileTableInterface<String, BufferedReader> getFileTable()
     {
         return fileTable;
+    }
+
+    public HeapInterface getHeapTable()
+    {
+        return heapTable;
+    }
+
+    public void setHeapTable(HeapInterface heapTable)
+    {
+        this.heapTable = heapTable;
     }
 
     public void setFileTable(FileTableInterface<String, BufferedReader> fileTable)

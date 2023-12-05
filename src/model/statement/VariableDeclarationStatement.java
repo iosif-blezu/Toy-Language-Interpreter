@@ -50,4 +50,10 @@ public class VariableDeclarationStatement implements InterfaceStatement {
 
             return state;
     }
+
+    @Override
+    public DictionaryInterface<String, Type> typeCheck(DictionaryInterface<String, Type> typeEnv) throws MyException {
+        typeEnv.add(name, type);
+        return typeEnv;
+    }
 }
